@@ -1,5 +1,5 @@
 import 'package:astu/schedule/bloc/schedule_bloc.dart';
-import 'package:astu/view/pages/schedule_page/widgets/schedule_view.dart';
+import 'package:astu/view/pages/schedule_page/widgets/schedule_tile.dart';
 import 'package:astu/view/pages/schedule_page/widgets/time_table_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,59 +21,27 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.colorScheme.background,
-      appBar: AppBar(),
-      body: Center(
-        child: SingleChildScrollView(
-          child: BlocBuilder<ScheduleBloc, ScheduleState>(
-              builder: (context, state) {
-            switch (state) {
-              case ScheduleInitial():
-                return Column(children: [
-                  const ScheduleViewHeader("Monday"),
-                  ScheduleView(
-                      length: state.schedules.isEmpty
-                          ? numOfScheduleTilesForMonday
-                          : state.schedules.length,
-                      schedules: const []),
-                  addSchedule("monday"),
-                  const ScheduleViewHeader("Tuesday"),
-                  ScheduleView(
-                      length: numOfScheduleTilesForTuesday,
-                      schedules: const []),
-                  addSchedule("tuesday"),
-                  const ScheduleViewHeader("Wednesday"),
-                  ScheduleView(
-                      length: numOfScheduleTilesForWednesday,
-                      schedules: const []),
-                  addSchedule("wednesday"),
-                  const ScheduleViewHeader("Thursday"),
-                  ScheduleView(
-                      length: numOfScheduleTilesForThursday,
-                      schedules: const []),
-                  addSchedule("thursday"),
-                  const ScheduleViewHeader("Friday"),
-                  ScheduleView(
-                      length: numOfScheduleTilesForFriday, schedules: const []),
-                  addSchedule("friday"),
-                ]);
-              case ScheduleSaveSuccess():
-                return Column(
-                  children: [
-                    const ScheduleViewHeader("Monday"),
-                    ScheduleView(
-                        length: state.schedules.isEmpty
-                            ? numOfScheduleTilesForMonday
-                            : state.schedules.length,
-                        schedules: const []),
-                    addSchedule("monday"),
-                  ],
-                );
-            }
-          }),
-        ),
-      ),
-    );
+        backgroundColor: theme.colorScheme.background,
+        appBar: AppBar(),
+        body: Center(
+            child: SingleChildScrollView(
+                child: Column(children: [
+          const ScheduleViewHeader("Monday"),
+          scheduleView(numOfScheduleTilesForMonday, 1),
+          addSchedule("monday"),
+          const ScheduleViewHeader("Tuesday"),
+          scheduleView(numOfScheduleTilesForTuesday, 2),
+          addSchedule("tuesday"),
+          const ScheduleViewHeader("Wednesday"),
+          scheduleView(numOfScheduleTilesForWednesday, 3),
+          addSchedule("wednesday"),
+          const ScheduleViewHeader("Thursday"),
+          scheduleView(numOfScheduleTilesForThursday, 4),
+          addSchedule("thursday"),
+          const ScheduleViewHeader("Friday"),
+          scheduleView(numOfScheduleTilesForFriday, 5),
+          addSchedule("friday"),
+        ]))));
   }
 
   GestureDetector addSchedule(String day) {
@@ -103,6 +71,14 @@ class _SchedulePageState extends State<SchedulePage> {
         ),
         child: const Center(child: Icon(Icons.add)),
       ),
+    );
+  }
+
+  scheduleView(int length, weekDay) {
+    return Column(
+      children: [
+        for (int i = 0; i < length; i++) ScheduleTile(weekDay: weekDay)
+      ],
     );
   }
 }

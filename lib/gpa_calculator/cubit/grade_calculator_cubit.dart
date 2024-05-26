@@ -17,12 +17,12 @@ class GradeCalculatorCubit extends Cubit<GradeCalculatorState> {
     final creditHours =
         List.generate(courses.length, (index) => courses[index].score);
     for (int i = 0; i < scores.length; i++) {
-      sum += scores[i] * creditHours[i];
+      sum += scores[i]! * creditHours[i]!;
     }
 
     calculatedGrade = sum /
         creditHours.fold(
-            0.0, (previousValue, element) => previousValue + element);
+            0.0, (previousValue, element) => previousValue + element!);
     emit(state.copyWith(calculatedGrade: calculatedGrade));
   }
 

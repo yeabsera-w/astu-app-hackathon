@@ -49,13 +49,13 @@ extension GradeExtention on Grade {
 
 @HiveType(typeId: 1)
 class Course extends Equatable {
-  const Course({required this.name, required this.grade, required this.score});
+  const Course({required this.name, this.grade, this.score});
   @HiveField(0)
   final String name;
   @HiveField(1)
-  final Grade grade;
+  final Grade? grade;
   @HiveField(2)
-  final double score;
+  final double? score;
 
   @override
   List<Object?> get props => [name];

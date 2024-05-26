@@ -62,7 +62,6 @@ class Home extends StatelessWidget {
     return BlocBuilder<ScheduleBloc, ScheduleState>(builder: (context, state) {
       switch (state) {
         case ScheduleInitial():
-        case ScheduleSaveSuccess():
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,6 +82,75 @@ class Home extends StatelessWidget {
                   classTime: "02:00",
                   classAddress: "B510R15",
                   courseName: "Gaming",
+                  hieght: MediaQuery.sizeOf(context).height * 0.06,
+                  width: MediaQuery.sizeOf(context).width * 0.7),
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  height: MediaQuery.sizeOf(context).height * 0.25,
+                  width: MediaQuery.sizeOf(context).width * 0.8,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        meal(
+                            mealName: queryFoodMenu(today)["breakfast"]!,
+                            mealType: "Lunch",
+                            context: context),
+                        meal(
+                            mealName: queryFoodMenu(today)["lunch"]!,
+                            mealType: "Lunch",
+                            context: context),
+                        meal(
+                            mealName: queryFoodMenu(today)["dinner"]!,
+                            mealType: "Dinner",
+                            context: context),
+                      ]),
+                ),
+              ),
+              SizedBox(
+                  height: MediaQuery.sizeOf(context).height * 0.2,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: const [
+                      DataCard(iconData: Icons.gavel, title: "Rules"),
+                      SizedBox(width: 10),
+                      DataCard(iconData: Icons.school, title: "Acadamics"),
+                      SizedBox(width: 10),
+                      DataCard(iconData: Icons.place, title: "Locations"),
+                      SizedBox(width: 10),
+                      DataCard(
+                          iconData: Icons.restaurant_menu, title: "Food spots"),
+                    ],
+                  ))
+            ],
+          );
+        case ScheduleSaveSuccess():
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ScheduleTile(
+                  classTime: state.schedules[0].time!.format(context),
+                  classAddress:
+                      "B${state.schedules[0].address!.blocNumber}R${state.schedules[0].address!.roomNumber}",
+                  courseName: state.schedules[0].course!.name,
+                  hieght: MediaQuery.sizeOf(context).height * 0.06,
+                  width: MediaQuery.sizeOf(context).width * 0.9),
+              ScheduleTile(
+                  classTime: state.schedules[1].time!.format(context),
+                  classAddress:
+                      "B${state.schedules[1].address!.blocNumber}R${state.schedules[0].address!.roomNumber}",
+                  courseName: state.schedules[1].course!.name,
+                  hieght: MediaQuery.sizeOf(context).height * 0.06,
+                  width: MediaQuery.sizeOf(context).width * 0.8),
+              ScheduleTile(
+                  classTime: state.schedules[2].time!.format(context),
+                  classAddress:
+                      "B${state.schedules[2].address!.blocNumber}R${state.schedules[0].address!.roomNumber}",
+                  courseName: state.schedules[2].course!.name,
                   hieght: MediaQuery.sizeOf(context).height * 0.06,
                   width: MediaQuery.sizeOf(context).width * 0.7),
               Center(

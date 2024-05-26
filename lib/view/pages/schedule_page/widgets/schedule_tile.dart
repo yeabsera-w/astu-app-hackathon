@@ -1,13 +1,20 @@
+import 'package:astu/data/models/class_address.dart';
+import 'package:astu/data/models/models.dart';
+import 'package:astu/schedule/bloc/schedule_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScheduleTile extends StatefulWidget {
-  const ScheduleTile({super.key});
+  const ScheduleTile({required this.weekDay, super.key});
+  final int weekDay;
 
   @override
   State<ScheduleTile> createState() => _ScheduleTileState();
 }
 
 class _ScheduleTileState extends State<ScheduleTile> {
+  String? courseName = "OOP";
+  List<Schedule> schedules = [];
   TimeOfDay? initialTime = const TimeOfDay(hour: 08, minute: 00);
   Text formattedAvenue = const Text("Avenue");
   TextEditingController courseController = TextEditingController();
@@ -135,13 +142,29 @@ class _ScheduleTileState extends State<ScheduleTile> {
                 );
               },
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 2),
-              width: MediaQuery.sizeOf(context).width * 0.15,
-              child: TextField(
-                controller: courseController,
-                decoration: const InputDecoration.collapsed(hintText: "course"),
-              ),
+            DropdownButton(
+              value: courseName,
+              items: const [
+                DropdownMenuItem<String>(value: "OOP", child: Text("OOP")),
+                DropdownMenuItem<String>(value: "SRE", child: Text("SRE")),
+                DropdownMenuItem<String>(value: "HCI", child: Text("HCI")),
+              ],
+              onChanged: (value) {
+                Schedule schedule = Schedule(
+                    day: Day.fromWeekDay(widget.weekDay),
+                    time: initialTime,
+                    course: Course(name: courseName!),
+                    address: ClassAddress(
+                        blocNumber: int.parse(buildingController.text),
+                        roomNumber: int.parse(roomController.text)));
+                setState(() {
+                  courseName = value;
+                  schedules.add(schedule);
+                });
+                context
+                    .read<ScheduleBloc>()
+                    .add(ScheduleSaved(schedules: schedules));
+              },
             )
           ],
         ),
