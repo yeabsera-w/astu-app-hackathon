@@ -1,4 +1,6 @@
 import 'package:astu/schedule/bloc/schedule_bloc.dart';
+import 'package:astu/view/pages/food_spots/food_spots.dart';
+import 'package:astu/view/pages/home/home_page.dart';
 import 'package:astu/view/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +17,7 @@ class App extends StatelessWidget {
           )
         ],
         child: MaterialApp(
-          home: const SchedulePage(),
+          home: const HomePage(),
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(
