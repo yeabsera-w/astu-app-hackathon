@@ -66,14 +66,11 @@ class Home extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              for (int i = 1; i <= 3; i++)
-                ScheduleTile(
-                    classTime: "02:00",
-                    classAddress: "B507R10",
-                    courseName: "OOP",
-                    hieght: MediaQuery.sizeOf(context).height * 0.06,
-                    width: (MediaQuery.sizeOf(context).width) -
-                        (3 * i / 20 * MediaQuery.sizeOf(context).width)),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * 0.3,
+                child: const Center(
+                    child: Text("Your schedules will appear here once added")),
+              ),
               Center(
                 child: Container(
                   alignment: Alignment.center,
@@ -126,10 +123,11 @@ class Home extends StatelessWidget {
                 ScheduleTile(
                     classTime: state.schedules[i].time!.format(context),
                     classAddress:
-                        "B${state.schedules[i].address!.blocNumber}R${state.schedules[0].address!.roomNumber}",
+                        "B${state.schedules[i].address!.blocNumber}R${state.schedules[i].address!.roomNumber}",
                     courseName: state.schedules[i].course!.name,
                     hieght: MediaQuery.sizeOf(context).height * 0.06,
-                    width: MediaQuery.sizeOf(context).width * 0.9),
+                    width: (MediaQuery.sizeOf(context).width) -
+                        (3 * i / 20 * MediaQuery.sizeOf(context).width)),
               Center(
                 child: Container(
                   alignment: Alignment.center,
