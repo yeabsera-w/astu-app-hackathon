@@ -8,8 +8,8 @@ sealed class ScheduleEvent extends Equatable {
   List<Object> get props => [schedules];
 }
 
-final class ScheduleSaved extends ScheduleEvent {
-  const ScheduleSaved({required List<Schedule> schedules})
+final class ScheduleAdded extends ScheduleEvent {
+  const ScheduleAdded({required List<Schedule> schedules})
       : super(
           schedules: schedules,
         );

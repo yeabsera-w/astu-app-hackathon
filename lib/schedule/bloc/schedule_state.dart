@@ -12,7 +12,7 @@ final class ScheduleInitial extends ScheduleState {
   ScheduleInitial() : super(schedules: []);
 }
 
-final class ScheduleSaveSuccess extends ScheduleState {
-  const ScheduleSaveSuccess({required List<Schedule> schedules})
+final class ScheduleAddSuccess extends ScheduleState {
+  const ScheduleAddSuccess({required List<Schedule> schedules})
       : super(schedules: schedules);
 }

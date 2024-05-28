@@ -150,20 +150,20 @@ class _ScheduleTileState extends State<ScheduleTile> {
                 DropdownMenuItem<String>(value: "HCI", child: Text("HCI")),
               ],
               onChanged: (value) {
-                Schedule schedule = Schedule(
-                    day: Day.fromWeekDay(widget.weekDay),
-                    time: initialTime,
-                    course: Course(name: courseName!),
-                    address: ClassAddress(
-                        blocNumber: int.parse(buildingController.text),
-                        roomNumber: int.parse(roomController.text)));
                 setState(() {
                   courseName = value;
+                  Schedule schedule = Schedule(
+                      day: Day.fromWeekDay(widget.weekDay),
+                      time: initialTime,
+                      course: Course(name: courseName!),
+                      address: ClassAddress(
+                          blocNumber: int.parse(buildingController.text),
+                          roomNumber: int.parse(roomController.text)));
                   schedules.add(schedule);
                 });
                 context
                     .read<ScheduleBloc>()
-                    .add(ScheduleSaved(schedules: schedules));
+                    .add(ScheduleAdded(schedules: schedules));
               },
             )
           ],

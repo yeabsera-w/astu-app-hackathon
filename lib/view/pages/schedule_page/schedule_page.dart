@@ -1,8 +1,6 @@
-import 'package:astu/schedule/bloc/schedule_bloc.dart';
 import 'package:astu/view/pages/schedule_page/widgets/schedule_tile.dart';
 import 'package:astu/view/pages/schedule_page/widgets/time_table_header.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});

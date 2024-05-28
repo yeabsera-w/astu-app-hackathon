@@ -7,10 +7,11 @@ part 'schedule_state.dart';
 
 class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
   ScheduleBloc() : super(ScheduleInitial()) {
-    on<ScheduleSaved>(_onScheduleSaved);
+    on<ScheduleAdded>(_onScheduleSaved);
   }
 
-  void _onScheduleSaved(ScheduleSaved event, Emitter emit) {
-    emit(ScheduleSaveSuccess(schedules: event.schedules));
+  void _onScheduleSaved(ScheduleAdded event, Emitter emit) {
+    state.schedules.addAll(event.schedules);
+    emit(ScheduleAddSuccess(schedules: state.schedules));
   }
 }

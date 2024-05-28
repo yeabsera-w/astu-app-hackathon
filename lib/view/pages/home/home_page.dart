@@ -66,24 +66,14 @@ class Home extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ScheduleTile(
-                  classTime: "02:00",
-                  classAddress: "B510R15",
-                  courseName: "OOP",
-                  hieght: MediaQuery.sizeOf(context).height * 0.06,
-                  width: MediaQuery.sizeOf(context).width * 0.9),
-              ScheduleTile(
-                  classTime: "02:00",
-                  classAddress: "B510R15",
-                  courseName: "MAD",
-                  hieght: MediaQuery.sizeOf(context).height * 0.06,
-                  width: MediaQuery.sizeOf(context).width * 0.8),
-              ScheduleTile(
-                  classTime: "02:00",
-                  classAddress: "B510R15",
-                  courseName: "Gaming",
-                  hieght: MediaQuery.sizeOf(context).height * 0.06,
-                  width: MediaQuery.sizeOf(context).width * 0.7),
+              for (int i = 1; i <= 3; i++)
+                ScheduleTile(
+                    classTime: "02:00",
+                    classAddress: "B507R10",
+                    courseName: "OOP",
+                    hieght: MediaQuery.sizeOf(context).height * 0.06,
+                    width: (MediaQuery.sizeOf(context).width) -
+                        (3 * i / 20 * MediaQuery.sizeOf(context).width)),
               Center(
                 child: Container(
                   alignment: Alignment.center,
@@ -127,32 +117,19 @@ class Home extends StatelessWidget {
                   ))
             ],
           );
-        case ScheduleSaveSuccess():
+        case ScheduleAddSuccess():
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ScheduleTile(
-                  classTime: state.schedules[0].time!.format(context),
-                  classAddress:
-                      "B${state.schedules[0].address!.blocNumber}R${state.schedules[0].address!.roomNumber}",
-                  courseName: state.schedules[0].course!.name,
-                  hieght: MediaQuery.sizeOf(context).height * 0.06,
-                  width: MediaQuery.sizeOf(context).width * 0.9),
-              ScheduleTile(
-                  classTime: state.schedules[1].time!.format(context),
-                  classAddress:
-                      "B${state.schedules[1].address!.blocNumber}R${state.schedules[0].address!.roomNumber}",
-                  courseName: state.schedules[1].course!.name,
-                  hieght: MediaQuery.sizeOf(context).height * 0.06,
-                  width: MediaQuery.sizeOf(context).width * 0.8),
-              ScheduleTile(
-                  classTime: state.schedules[2].time!.format(context),
-                  classAddress:
-                      "B${state.schedules[2].address!.blocNumber}R${state.schedules[0].address!.roomNumber}",
-                  courseName: state.schedules[2].course!.name,
-                  hieght: MediaQuery.sizeOf(context).height * 0.06,
-                  width: MediaQuery.sizeOf(context).width * 0.7),
+              for (int i = 0; i < state.schedules.length; i++)
+                ScheduleTile(
+                    classTime: state.schedules[i].time!.format(context),
+                    classAddress:
+                        "B${state.schedules[i].address!.blocNumber}R${state.schedules[0].address!.roomNumber}",
+                    courseName: state.schedules[i].course!.name,
+                    hieght: MediaQuery.sizeOf(context).height * 0.06,
+                    width: MediaQuery.sizeOf(context).width * 0.9),
               Center(
                 child: Container(
                   alignment: Alignment.center,
@@ -222,22 +199,22 @@ class Home extends StatelessWidget {
 
   Map<String, String> queryFoodMenu(DateTime date) {
     if (date.weekday == 1) {
-      return {"breakfaset": "Firfir", "lunch": "Rice", "dinner": "Shiro"};
+      return {"breakfast": "Firfir", "lunch": "Rice", "dinner": "Shiro"};
     }
     if (date.weekday == 2) {
-      return {"breakfaset": "Macaroney", "lunch": "Misir", "dinner": "Meat"};
+      return {"breakfast": "Macaroney", "lunch": "Misir", "dinner": "Meat"};
     }
     if (date.weekday == 3) {
-      return {"breakfaset": "Firfir", "lunch": "Shiro", "dinner": "Dinnich"};
+      return {"breakfast": "Firfir", "lunch": "Shiro", "dinner": "Dinnich"};
     }
     if (date.weekday == 4) {
-      return {"breakfaset": "Firfir", "lunch": "Shiro", "dinner": "Meat"};
+      return {"breakfast": "Firfir", "lunch": "Shiro", "dinner": "Meat"};
     }
     if (date.weekday == 5) {
-      return {"breakfaset": "Firfir", "lunch": "Misir", "dinner": "Dinnich"};
+      return {"breakfast": "Firfir", "lunch": "Misir", "dinner": "Dinnich"};
     }
     if (date.weekday == 6) {
-      return {"breakfaset": "Rice", "lunch": "Misir", "dinner": "Shiro"};
+      return {"breakfast": "Rice", "lunch": "Misir", "dinner": "Shiro"};
     }
     if (date.weekday == 7) {
       return {"breakfast": "Firfir", "lunch": "Pasta", "dinner": "Shiro"};
